@@ -1,0 +1,27 @@
+.cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartIcon {
+  margin: 2rem;
+}
+
+.cartText {
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  .cart {
+    margin-right: 20rem;
+  }
+
+  .cartIcon {
+    margin: 1rem;
+  }
+
+  .cartText {
+    display: inline-block;
+  }
+}

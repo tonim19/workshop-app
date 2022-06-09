@@ -1,0 +1,17 @@
+footer {
+  padding: 1rem 4rem;
+  border-top: 1px solid #fff;
+  background-color: var(--bg-secondary-color);
+}
+
+footer h6 {
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-light-grey);
+}
+
+@media screen and (min-width: 800px) {
+  footer {
+    padding: 3rem 8rem;
+  }
+}
