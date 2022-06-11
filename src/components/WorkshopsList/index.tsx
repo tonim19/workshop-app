@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as CartIcon } from "../../assets/images/svg/cart-icon.svg";
 import { ReactComponent as DateIcon } from "../../assets/images/svg/date-icon.svg";
 import { ReactComponent as TimeIcon } from "../../assets/images/svg/time-icon.svg";
+import { ReactComponent as DesignLogo } from "../../assets/images/svg/design-logo.svg";
 import { addItem } from "../../context/cart/cartActions";
 import CartContext from "../../context/cart/cartContext";
 import CategoryContext from "../../context/category/categoryContext";
 import { Item } from "../../interfaces";
-import { numberWithCommas } from "../helpers/util-functions";
+import { numberWithCommas } from "../../helpers/util-functions";
 import "./workshop-list.css";
 
 function WorkshopsList({
@@ -119,47 +120,59 @@ function WorkshopsList({
   };
 
   return (
-    <div className="workshopList">
-      {filteredWorkshops?.map((workshop) => (
-        <article key={workshop.id}>
-          <img
-            src={workshop.imageUrl}
-            alt="workshop cover"
-            onClick={() => handleNavigate(workshop.id)}
-            className="workshopCoverImage"
-          />
-          <div className="workshopDetails">
-            <div className="dateAndTime">
-              <h6 className="date">
-                <DateIcon /> <span>{workshop.date}</span>
-              </h6>
-              <h6 className="time">
-                <TimeIcon /> <span>{workshop.time}</span>
-              </h6>
+    <>
+      <div className="workshopList">
+        {filteredWorkshops?.map((workshop) => (
+          <article key={workshop.id}>
+            <div className="workshopCoverDiv">
+              <img
+                src={workshop.imageUrl}
+                alt="workshop cover"
+                className="workshopCoverImage"
+                onClick={() => handleNavigate(workshop.id)}
+              />
+              <img
+                src={require(`../../assets/images/jpg/${workshop.category}-logo.png`)}
+                width={32}
+                height={32}
+                className="categoryLogo"
+                style={{ backgroundColor: "#000" }}
+                alt=""
+              />
             </div>
-            <h4
-              className="workshopTitle"
-              onClick={() => handleNavigate(workshop.id)}
-            >
-              {workshop.title}
-            </h4>
-            <div className="workshopPriceAndBtn">
-              <h3 className="workshopPrice">
-                {numberWithCommas(workshop.price)}
-              </h3>
-              <div
-                className="workshopCartIcon"
-                onClick={() => addToCart(workshop, 1)}
+            <div className="workshopDetails">
+              <div className="dateAndTime">
+                <h6 className="date">
+                  <DateIcon /> <span>{workshop.date}</span>
+                </h6>
+                <h6 className="time">
+                  <TimeIcon /> <span>{workshop.time}</span>
+                </h6>
+              </div>
+              <h4
+                className="workshopTitle"
+                onClick={() => handleNavigate(workshop.id)}
               >
-                <CartIcon className="workshopCart" />
-                <button className="addToCartBtn" type="button">
-                  Add to cart
-                </button>
+                {workshop.title}
+              </h4>
+              <div className="workshopPriceAndBtn">
+                <h3 className="workshopPrice">
+                  {numberWithCommas(workshop.price)}
+                </h3>
+                <div
+                  className="workshopCartIcon"
+                  onClick={() => addToCart(workshop, 1)}
+                >
+                  <CartIcon className="workshopCart" />
+                  <button className="addToCartBtn" type="button">
+                    Add to cart
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))}
+      </div>
       {moreWorkshopsAvailable && (
         <button
           type="button"
@@ -169,7 +182,7 @@ function WorkshopsList({
           Load More
         </button>
       )}
-    </div>
+    </>
   );
 }
 

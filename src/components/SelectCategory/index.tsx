@@ -7,12 +7,12 @@ import {
   useState,
 } from "react";
 import { ReactComponent as ArrowDown } from "../../assets/images/svg/arrow-down.svg";
-import { ReactComponent as DesignLogo } from "../../assets/images/svg/DesignLogo.svg";
-import { ReactComponent as FrontendLogo } from "../../assets/images/svg/FrontendLogo.svg";
-import { ReactComponent as BackendLogo } from "../../assets/images/svg/BackendLogo.svg";
-import { ReactComponent as MarketingLogo } from "../../assets/images/svg/MarketingLogo.svg";
+import { ReactComponent as DesignLogo } from "../../assets/images/svg/design-logo.svg";
+import { ReactComponent as FrontendLogo } from "../../assets/images/svg/frontend-logo.svg";
+import { ReactComponent as BackendLogo } from "../../assets/images/svg/backend-logo.svg";
+import { ReactComponent as MarketingLogo } from "../../assets/images/svg/marketing-logo.svg";
 import CategoryInput from "../CategoryInput";
-import { capitalizeFirstLetter } from "../helpers/util-functions";
+import { capitalizeFirstLetter } from "../../helpers/util-functions";
 import "./select-category.css";
 import CategoryContext from "../../context/category/categoryContext";
 

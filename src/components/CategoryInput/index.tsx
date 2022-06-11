@@ -1,5 +1,5 @@
 import { ChangeEvent, ReactNode } from "react";
-import { capitalizeFirstLetter } from "../helpers/util-functions";
+import { capitalizeFirstLetter } from "../../helpers/util-functions";
 
 type Props = {
   categoryName: string;

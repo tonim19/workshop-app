@@ -41,6 +41,7 @@ function Cart() {
           ? "1 Workshop in Cart"
           : `${state.cartItems.length} Workshops in Cart`}
       </span>
+      <div className="cartItem"></div>
     </div>
   );
 }

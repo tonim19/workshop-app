@@ -1,9 +1,15 @@
 article {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   margin: 2rem 0;
+  border-radius: 8px;
   position: relative;
+  box-shadow: 1px 2px 8px rgba(127, 127, 127, 0.25);
+}
+
+article:hover {
+  box-shadow: 1px 2px 16px rgba(127, 127, 127, 0.3);
 }
 
 .workshopDetails {
@@ -32,13 +38,24 @@ article {
   color: var(--color-blue);
 }
 
-.workshopCoverImage {
+.workshopCoverDiv {
+  position: relative;
   cursor: pointer;
   width: 35%;
+}
+.workshopCoverImage {
   aspect-ratio: 3/4;
   object-fit: cover;
   object-position: 35%;
   border-radius: 8px 0 0 8px;
+  height: 100%;
+}
+
+.categoryLogo {
+  position: absolute;
+  top: 10%;
+  right: -16px;
+  border-radius: 8px;
 }
 
 .workshopPriceAndBtn {
@@ -56,6 +73,7 @@ article {
   cursor: pointer;
   background-color: var(--color-yellow);
   padding: 0.4rem;
+  margin: 1rem 3rem;
   border-radius: 4px;
 }
 
@@ -83,7 +101,8 @@ article {
   article {
     flex-direction: column;
     align-items: center;
-    width: 32rem;
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .workshopCart {
@@ -92,26 +111,45 @@ article {
 
   .workshopDetails {
     margin-left: 0;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
   }
 
-  .workshopCoverImage {
+  .workshopCoverDiv {
     width: 100%;
+  }
+  .workshopCoverImage {
     aspect-ratio: 16/9;
     border-radius: 8px 8px 0 0;
   }
 
+  .categoryLogo {
+    right: 16px;
+    top: 90%;
+    border-radius: 8px;
+  }
+
   .workshopPriceAndBtn {
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    margin: 0;
+    margin-top: auto;
   }
 
   .workshopPrice {
-    margin: 0 0 2rem 0;
+    margin: 1rem 0 2rem 0;
   }
 
   .workshopCartIcon {
+    margin: 0;
+    margin-bottom: 2rem;
     width: 100%;
     padding: 1.5rem 2rem;
+    align-self: flex-start;
   }
 
   .addToCartBtn {
