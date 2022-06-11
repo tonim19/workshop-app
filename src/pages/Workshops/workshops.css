@@ -1,0 +1,12 @@
+.workshopsTitle {
+  margin-left: 2rem;
+}
+
+.displayedWorkshops {
+  margin: 0.5rem 2rem;
+  color: var(--color-light-grey);
+}
+
+.displayedWorkshops strong {
+  color: var(--color-darker-grey);
+}

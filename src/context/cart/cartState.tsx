@@ -6,12 +6,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-const CartContextProvider = (props: Props) => {
-  const initialState = {
-    hidden: true,
-    cartItems: [],
-  };
+const initialState = {
+  hidden: true,
+  cartItems: [],
+};
 
+const CartContextProvider = (props: Props) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   return (

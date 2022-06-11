@@ -1,6 +1,12 @@
 import { Item } from "../../interfaces";
 import { CartActionTypes } from "./cartTypes";
 
+export const toggleCartHidden = () => {
+  return {
+    type: CartActionTypes.TOGGLE_CART_HIDDEN,
+  };
+};
+
 export const addItem = (item: Item, quantity: number) => {
   return {
     type: CartActionTypes.ADD_ITEM,

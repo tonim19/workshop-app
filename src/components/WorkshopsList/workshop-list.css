@@ -1,0 +1,126 @@
+article {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.workshopDetails {
+  width: 100%;
+  margin-left: 2rem;
+}
+
+.dateAndTime {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dateAndTime h6 {
+  display: flex;
+  align-items: flex-end;
+  margin: 3rem 0 1rem 0;
+}
+
+.date {
+  padding-right: 1.5rem;
+}
+
+.workshopTitle {
+  cursor: pointer;
+  color: var(--color-blue);
+}
+
+.workshopCoverImage {
+  cursor: pointer;
+  width: 35%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: 35%;
+  border-radius: 8px 0 0 8px;
+}
+
+.workshopPriceAndBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 1rem 0;
+}
+
+.workshopPrice {
+  margin: 0.5rem 0;
+}
+
+.workshopCartIcon {
+  cursor: pointer;
+  background-color: var(--color-yellow);
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+
+.loadMoreBtn {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  margin: 3rem auto;
+  font-size: 1.84rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-blue);
+}
+
+.addToCartBtn {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  .workshopList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  article {
+    flex-direction: column;
+    align-items: center;
+    width: 32rem;
+  }
+
+  .workshopCart {
+    display: none;
+  }
+
+  .workshopDetails {
+    margin-left: 0;
+  }
+
+  .workshopCoverImage {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .workshopPriceAndBtn {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .workshopPrice {
+    margin: 0 0 2rem 0;
+  }
+
+  .workshopCartIcon {
+    width: 100%;
+    padding: 1.5rem 2rem;
+  }
+
+  .addToCartBtn {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+}
