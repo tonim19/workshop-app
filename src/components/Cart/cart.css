@@ -26,6 +26,15 @@
   background-color: #fff;
 }
 
+.cartContainer {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
 .cartActive .cartIcon {
   cursor: unset;
   margin-left: 4rem;
@@ -48,6 +57,119 @@
   margin-right: 4rem;
 }
 
+.cartItems {
+  width: 100%;
+  margin: 0 auto;
+  height: 34rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cartItem {
+  width: 100%;
+  background-color: var(--color-lighter-grey);
+  display: flex;
+  border-radius: 8px;
+  box-shadow: 1px 2px 8px rgba(127, 127, 127, 0.25);
+}
+
+.cartItem:hover {
+  box-shadow: 1px 2px 16px rgba(127, 127, 127, 0.3);
+}
+
+.cartItemImage {
+  width: 35%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+
+.cartItemDetails {
+  width: 65%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartItemTitleAndRemoveBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartItemTitle {
+  color: var(--color-blue);
+  font-weight: 700;
+  font-size: 1.89rem;
+}
+
+.cartItemRemoveBtn {
+  cursor: pointer;
+}
+
+.cartItemQuantityAndPrice {
+  display: flex;
+  align-items: center;
+}
+
+.cartItemQuantity {
+  border-radius: 8px;
+  padding: 0.8rem;
+  background-color: #fff;
+  border: 1px solid var(--color-blue);
+}
+
+.cartItemQuantity select {
+  outline: none;
+  border-radius: 8px;
+  padding: 0.2rem;
+  background-color: #fff;
+  font-size: 1.84rem;
+  border: none;
+}
+
+.cartItemPrice {
+  font-size: 2.03rem;
+  font-weight: 700;
+  margin-left: 2rem;
+}
+
+.currency {
+  font-size: 1.35rem;
+}
+
+.cartItemsSubtotalDiv {
+  margin: 4rem 1rem;
+}
+
+.cartItemsSubtotalTitle {
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--color-light-grey);
+}
+
+.cartItemsSubtotalPrice {
+  font-weight: 700;
+  font-size: 3.2rem;
+}
+.cartItemsSubtotalPrice .currency {
+  font-size: 1.89rem;
+}
+
+.checkoutBtn {
+  cursor: pointer;
+  padding: 2rem;
+  margin: 2rem 0;
+  font-size: 1.84rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--color-blue);
+  border: none;
+  border-radius: 8px;
+}
+
 @media screen and (min-width: 800px) {
   .cart {
     margin-right: 15rem;
@@ -63,5 +185,9 @@
 
   .cartActive {
     width: 38rem;
+  }
+
+  .currency {
+    font-size: 1.5rem;
   }
 }

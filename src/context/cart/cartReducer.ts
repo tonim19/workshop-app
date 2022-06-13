@@ -1,6 +1,10 @@
 import { CartState } from "../../interfaces";
 import { CartActionTypes } from "./cartTypes";
-import { addItemToCart } from "./cartUtils";
+import {
+  addItemToCart,
+  changeCartItemQuantity,
+  removeItemFromCart,
+} from "./cartUtils";
 
 const cartReducer = (state: CartState, action: any) => {
   switch (action.type) {
@@ -13,6 +17,16 @@ const cartReducer = (state: CartState, action: any) => {
       return {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
+      };
+    case CartActionTypes.REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
+      };
+    case CartActionTypes.CHANGE_ITEM_QUANTITY:
+      return {
+        ...state,
+        cartItems: changeCartItemQuantity(state.cartItems, action.payload),
       };
     default:
       return state;

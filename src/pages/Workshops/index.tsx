@@ -5,14 +5,15 @@ import "./workshops.css";
 
 function Workshops() {
   const [displayedWorshops, setDisplayedWorkshops] = useState(0);
+
   return (
     <div className="container">
       <SelectCategory />
       <div className="mainContent">
         <h2 className="workshopsTitle">Workshops</h2>
-        <h6 className="displayedWorkshops">
+        <p className="displayedWorkshops">
           Displayed: <strong>{displayedWorshops}</strong>
-        </h6>
+        </p>
         <WorkshopsList setDisplayedWorkshops={setDisplayedWorkshops} />
       </div>
     </div>

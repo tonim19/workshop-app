@@ -3,5 +3,16 @@ export const capitalizeFirstLetter = (string: string) => {
 };
 
 export const numberWithCommas = (price: number) => {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ",00 EUR";
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ",00";
+};
+
+export const formatDate = (unformattedDate: string) => {
+  const fullDate = new Date(unformattedDate);
+  const date = fullDate.toLocaleDateString("hr").replaceAll(" ", "");
+  const time =
+    fullDate.toLocaleTimeString("hr", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }) + "h";
+  return { date, time };
 };

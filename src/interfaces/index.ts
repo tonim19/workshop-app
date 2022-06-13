@@ -11,6 +11,13 @@ export interface Item {
   quantity: number;
 }
 
+export interface User {
+  email: string;
+  name: string;
+  password: string;
+  id: number;
+}
+
 export interface CartState {
   hidden: boolean;
   cartItems: Item[];

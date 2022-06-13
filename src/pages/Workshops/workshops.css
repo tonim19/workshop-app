@@ -3,10 +3,18 @@
 }
 
 .displayedWorkshops {
+  font-size: 1.35rem;
+  font-weight: 700;
   margin: 0.5rem 2rem;
   color: var(--color-light-grey);
 }
 
 .displayedWorkshops strong {
   color: var(--color-darker-grey);
+}
+
+@media screen and (min-width: 800px) {
+  .displayedWorkshops {
+    font-size: 1.5rem;
+  }
 }

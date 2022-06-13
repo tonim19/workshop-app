@@ -1,0 +1,162 @@
+article {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 2rem 0;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 1px 2px 8px rgba(127, 127, 127, 0.25);
+}
+
+article:hover {
+  box-shadow: 1px 2px 16px rgba(127, 127, 127, 0.3);
+}
+
+.workshopCoverDiv {
+  position: relative;
+  cursor: pointer;
+  width: 35%;
+}
+
+.workshopCoverImage {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: 35%;
+  border-radius: 8px 0 0 8px;
+  height: 100%;
+}
+
+.categoryLogo {
+  padding: 0.4rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  position: absolute;
+  top: 10%;
+  right: -16px;
+  border-radius: 8px;
+}
+
+.workshopDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 3rem;
+}
+
+.dateAndTime {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dateAndTime p {
+  display: flex;
+  align-items: flex-end;
+  margin: 3rem 0 1rem 0;
+}
+
+p.date,
+p.time {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 1rem 0;
+  padding-right: 1.5rem;
+}
+
+.workshopTitle {
+  cursor: pointer;
+  color: var(--color-blue);
+}
+
+.workshopPriceAndBtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 1rem 0;
+}
+
+.workshopPrice {
+  margin: 0.5rem 0;
+}
+
+.workshopCartIcon {
+  cursor: pointer;
+  background-color: var(--color-yellow);
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+
+.addToCartBtn {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  article {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .workshopCoverDiv {
+    width: 100%;
+  }
+
+  .workshopCoverImage {
+    aspect-ratio: 16/9;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .categoryLogo {
+    width: 4rem;
+    height: 4rem;
+    right: 10%;
+    top: unset;
+    bottom: -20px;
+  }
+
+  .workshopDetails {
+    margin-left: 0;
+    /* width: 80%; */
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .workshopCartBtn {
+    display: none;
+  }
+
+  .date,
+  .time {
+    font-size: 1.5rem;
+  }
+
+  .workshopPriceAndBtn {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+  }
+
+  .workshopPrice {
+    margin: 1rem 0 2rem 0;
+  }
+
+  .workshopCartIcon {
+    margin: 0;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    align-self: flex-start;
+  }
+
+  .addToCartBtn {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+}

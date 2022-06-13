@@ -1,14 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ReactComponent as CartIcon } from "../../assets/images/svg/cart-icon.svg";
-import { ReactComponent as DateIcon } from "../../assets/images/svg/date-icon.svg";
-import { ReactComponent as TimeIcon } from "../../assets/images/svg/time-icon.svg";
-import { ReactComponent as DesignLogo } from "../../assets/images/svg/design-logo.svg";
-import { addItem } from "../../context/cart/cartActions";
-import CartContext from "../../context/cart/cartContext";
 import CategoryContext from "../../context/category/categoryContext";
+import { formatDate } from "../../helpers/util-functions";
 import { Item } from "../../interfaces";
-import { numberWithCommas } from "../../helpers/util-functions";
+import WorkshopCard from "../WorkshopCard";
 import "./workshop-list.css";
 
 function WorkshopsList({
@@ -16,7 +10,6 @@ function WorkshopsList({
 }: {
   setDisplayedWorkshops: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const { dispatch } = useContext(CartContext);
   const { category } = useContext(CategoryContext);
   const [workshops, setWorkshops] = useState<Item[] | null>(null);
   const [filteredWorkshops, setFilteredWorkshops] = useState<Item[] | null>(
@@ -24,8 +17,6 @@ function WorkshopsList({
   );
   const [page, setPage] = useState(1);
   const [moreWorkshopsAvailable, setMoreWorkshopsAvailable] = useState(true);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchWorkshops = async () => {
@@ -40,13 +31,8 @@ function WorkshopsList({
       });
 
       fetchedWorkshops.forEach((workshop: Item) => {
-        const fullDate = new Date(workshop.date);
-        const date = fullDate.toLocaleDateString("hr").replaceAll(" ", "");
-        const time =
-          fullDate.toLocaleTimeString("hr", {
-            hour: "2-digit",
-            minute: "2-digit",
-          }) + "h";
+        const { date, time } = formatDate(workshop.date);
+
         workshop.date = date;
         workshop.time = time;
       });
@@ -64,13 +50,14 @@ function WorkshopsList({
         const filteredWorkshops = workshops?.filter(
           (workshop) => workshop.category === category
         );
+
         setFilteredWorkshops(filteredWorkshops);
       }
     }
   }, [category, workshops]);
 
   useEffect(() => {
-    if (filteredWorkshops?.length) {
+    if (filteredWorkshops) {
       setDisplayedWorkshops(filteredWorkshops.length);
     }
   }, [filteredWorkshops, setDisplayedWorkshops]);
@@ -94,13 +81,8 @@ function WorkshopsList({
     });
 
     fetchedWorkshops.forEach((workshop: Item) => {
-      const fullDate = new Date(workshop.date);
-      const date = fullDate.toLocaleDateString("hr").replaceAll(" ", "");
-      const time =
-        fullDate.toLocaleTimeString("hr", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }) + "h";
+      const { date, time } = formatDate(workshop.date);
+
       workshop.date = date;
       workshop.time = time;
     });
@@ -111,66 +93,11 @@ function WorkshopsList({
     }
   };
 
-  const handleNavigate = (id: number) => {
-    navigate(`/workshop/details/${id}`);
-  };
-
-  const addToCart = (workshop: Item, quantity: number) => {
-    dispatch(addItem(workshop, quantity));
-  };
-
   return (
     <>
       <div className="workshopList">
         {filteredWorkshops?.map((workshop) => (
-          <article key={workshop.id}>
-            <div className="workshopCoverDiv">
-              <img
-                src={workshop.imageUrl}
-                alt="workshop cover"
-                className="workshopCoverImage"
-                onClick={() => handleNavigate(workshop.id)}
-              />
-              <img
-                src={require(`../../assets/images/jpg/${workshop.category}-logo.png`)}
-                width={32}
-                height={32}
-                className="categoryLogo"
-                style={{ backgroundColor: "#000" }}
-                alt=""
-              />
-            </div>
-            <div className="workshopDetails">
-              <div className="dateAndTime">
-                <h6 className="date">
-                  <DateIcon /> <span>{workshop.date}</span>
-                </h6>
-                <h6 className="time">
-                  <TimeIcon /> <span>{workshop.time}</span>
-                </h6>
-              </div>
-              <h4
-                className="workshopTitle"
-                onClick={() => handleNavigate(workshop.id)}
-              >
-                {workshop.title}
-              </h4>
-              <div className="workshopPriceAndBtn">
-                <h3 className="workshopPrice">
-                  {numberWithCommas(workshop.price)}
-                </h3>
-                <div
-                  className="workshopCartIcon"
-                  onClick={() => addToCart(workshop, 1)}
-                >
-                  <CartIcon className="workshopCart" />
-                  <button className="addToCartBtn" type="button">
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </article>
+          <WorkshopCard key={workshop.id} workshop={workshop} />
         ))}
       </div>
       {moreWorkshopsAvailable && (
