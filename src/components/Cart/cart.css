@@ -284,18 +284,62 @@
 }
 
 .checkoutFormGroup label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 1.35rem;
   font-weight: 600;
+}
+
+.error {
+  margin-left: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  color: red;
 }
 
 .checkoutFormBtn {
   cursor: pointer;
   width: 100%;
-  padding: 2rem;
+  padding: 2rem 4rem;
   border: none;
   font-size: 1.84rem;
   font-weight: 700;
   background-color: var(--color-yellow);
+  border-radius: 8px;
+  margin-top: 3rem;
+}
+
+.thanksContainer {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100vh;
+}
+
+.thanksHeading {
+  font-size: 3.2rem;
+  margin: 1rem 0;
+}
+
+.thanksParagraph {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-right: 10rem;
+  color: var(--color-light-grey);
+}
+
+.thanksBtn {
+  margin-bottom: 5rem;
+  margin-top: 30vh;
+  padding: 2rem 4rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-yellow);
+  font-size: 1.84rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 800px) {
@@ -323,5 +367,25 @@
     display: flex;
     justify-content: flex-start;
     gap: 4rem;
+  }
+
+  .checkoutFormBtn {
+    width: auto;
+  }
+
+  .thanksContainer {
+    padding: 6rem;
+    min-height: 0;
+    margin-right: 30%;
+  }
+
+  .thanksBtn {
+    margin-bottom: 2rem;
+    width: 20rem;
+    padding: 2rem 3rem;
+    margin-top: 4rem;
+    font-size: 1.84rem;
+    font-weight: 700;
+    cursor: pointer;
   }
 }

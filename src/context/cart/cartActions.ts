@@ -21,6 +21,12 @@ export const removeItem = (item: Item) => {
   };
 };
 
+export const clearItems = () => {
+  return {
+    type: CartActionTypes.CLEAR_ITEMS,
+  };
+};
+
 export const changeItemQuantity = (item: Item, quantity: number) => {
   return {
     type: CartActionTypes.CHANGE_ITEM_QUANTITY,
