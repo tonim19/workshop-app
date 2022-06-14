@@ -7,7 +7,6 @@
 .cartIcon {
   cursor: pointer;
   margin: 2rem;
-  position: relative;
 }
 
 .cartText {
@@ -17,10 +16,9 @@
 }
 
 .cartActive {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
   width: 100%;
   min-height: 100vh;
   background-color: #fff;
@@ -170,6 +168,136 @@
   border-radius: 8px;
 }
 
+.modalContentContainer {
+  padding: 4rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modalTitleAndCloseBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.modalTitleAndCloseBtn h1 {
+  font-size: 3.2rem;
+}
+
+.modalCloseBtn {
+  cursor: pointer;
+}
+
+.modalParagraph {
+  margin: 1rem 0;
+  margin-right: 40%;
+  font-size: 1.35rem;
+  color: var(--color-light-grey);
+}
+
+.checkoutFormGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkoutFormGroup:nth-of-type(7) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.checkoutFormGroup input {
+  width: 100%;
+  margin: 0 0 2rem 0;
+  padding: 1rem;
+  border: none;
+  border-bottom: 2px solid var(--color-light-grey);
+  color: var(--color-light-grey);
+  font-size: 1.84rem;
+}
+
+.datepicker-toggle {
+  position: relative;
+}
+
+.datepicker-toggle-button {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-image: url("../../assets/images/svg/calendar-icon.svg");
+}
+
+#birthDate {
+  padding-left: 3rem;
+}
+
+#birthDate::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 2.4rem;
+  height: 2.4rem;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.checkoutFormGroup input[type="checkbox"] {
+  margin: 0;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.checkoutFormGroup input:defined {
+  color: var(--color-black);
+}
+
+.checkoutFormGroup select {
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: none;
+  border-bottom: 2px solid var(--color-light-grey);
+  font-size: 1.84rem;
+  color: var(--color-light-grey);
+  background-color: #fff;
+}
+.checkoutFormGroup select:defined {
+  color: var(--color-black);
+}
+
+.checkoutFormGroup input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--color-blue);
+}
+
+.checkoutFormGroup select:focus {
+  outline: none;
+  border-bottom: 2px solid var(--color-blue);
+}
+
+.checkoutFormGroup label {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.checkoutFormBtn {
+  cursor: pointer;
+  width: 100%;
+  padding: 2rem;
+  border: none;
+  font-size: 1.84rem;
+  font-weight: 700;
+  background-color: var(--color-yellow);
+}
+
 @media screen and (min-width: 800px) {
   .cart {
     margin-right: 15rem;
@@ -189,5 +317,11 @@
 
   .currency {
     font-size: 1.5rem;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: flex-start;
+    gap: 4rem;
   }
 }

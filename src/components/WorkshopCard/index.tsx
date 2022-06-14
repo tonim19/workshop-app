@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as CartIcon } from "../../assets/images/svg/cart-icon.svg";
 import { ReactComponent as DateIcon } from "../../assets/images/svg/date-icon.svg";
 import { ReactComponent as TimeIcon } from "../../assets/images/svg/time-icon.svg";
-import { addItem } from "../../context/cart/cartActions";
+import { addItem, toggleCartHidden } from "../../context/cart/cartActions";
 import CartContext from "../../context/cart/cartContext";
 import { numberWithCommas } from "../../helpers/util-functions";
 import { Item } from "../../interfaces";
@@ -19,6 +19,7 @@ function WorkshopCard({ workshop }: { workshop: Item }) {
 
   const addToCart = (workshop: Item, quantity: number) => {
     dispatch(addItem(workshop, quantity));
+    dispatch(toggleCartHidden());
   };
 
   return (

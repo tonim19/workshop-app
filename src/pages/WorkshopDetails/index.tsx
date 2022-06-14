@@ -3,8 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as BackArrow } from "../../assets/images/svg/back-arrow.svg";
 import { ReactComponent as DateIcon } from "../../assets/images/svg/date-icon.svg";
 import { ReactComponent as TimeIcon } from "../../assets/images/svg/time-icon.svg";
+import Spinner from "../../components/Spinner";
 import WorkshopCard from "../../components/WorkshopCard";
-import { addItem } from "../../context/cart/cartActions";
+import { addItem, toggleCartHidden } from "../../context/cart/cartActions";
 import CartContext from "../../context/cart/cartContext";
 import { formatDate, numberWithCommas } from "../../helpers/util-functions";
 import { Item, User } from "../../interfaces";
@@ -19,6 +20,7 @@ function WorkshopDetails() {
   const [workshop, setWorkshop] = useState<Item | null>(null);
   const [author, setAuthor] = useState<User | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const params = useParams();
 
@@ -26,27 +28,32 @@ function WorkshopDetails() {
 
   useEffect(() => {
     const fetchWorkshops = async () => {
-      const response = await fetch(`http://localhost:3000/workshops`);
+      try {
+        const response = await fetch(`http://localhost:3000/workshops`);
 
-      const fetchedWorkshops: Item[] = await response.json();
+        const fetchedWorkshops: Item[] = await response.json();
 
-      fetchedWorkshops.sort((a, b) => {
-        const firstDate = new Date(a.date).getTime();
-        const secondDate = new Date(b.date).getTime();
-        return secondDate - firstDate;
-      });
+        fetchedWorkshops.sort((a, b) => {
+          const firstDate = new Date(a.date).getTime();
+          const secondDate = new Date(b.date).getTime();
+          return secondDate - firstDate;
+        });
 
-      fetchedWorkshops.forEach((workshop: Item) => {
-        const { date, time } = formatDate(workshop.date);
-        workshop.date = date;
-        workshop.time = time;
+        fetchedWorkshops.forEach((workshop: Item) => {
+          const { date, time } = formatDate(workshop.date);
+          workshop.date = date;
+          workshop.time = time;
 
-        if (workshop.id.toString() === params.workshopId) {
-          setWorkshop(workshop);
-        }
-      });
+          if (workshop.id.toString() === params.workshopId) {
+            setWorkshop(workshop);
+          }
+        });
 
-      setWorkshops(fetchedWorkshops);
+        setWorkshops(fetchedWorkshops);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
     };
 
     fetchWorkshops();
@@ -67,8 +74,10 @@ function WorkshopDetails() {
 
   useEffect(() => {
     const fetchAuthor = async () => {
+      if (!workshop?.userId) return;
+
       const response = await fetch(
-        `http://localhost:3000/users/${workshop?.userId}`
+        `http://localhost:3000/users/${workshop.userId}`
       );
 
       const author = await response.json();
@@ -83,11 +92,26 @@ function WorkshopDetails() {
     navigate("/");
   };
 
-  const onChangeQuantity = (e: ChangeEvent<HTMLSelectElement>) =>
+  const onChangeQuantity = (e: ChangeEvent<HTMLSelectElement>) => {
     setQuantity(parseInt(e.target.value));
+  };
 
-  if (!workshop) {
-    return <p>Loading...</p>;
+  const onAddItemToCart = (workshop: Item | null) => {
+    if (!workshop) return;
+    dispatch(addItem(workshop, quantity));
+    dispatch(toggleCartHidden());
+  };
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (!workshop && !loading) {
+    return (
+      <div className="workshopNotFoundDiv">
+        <h1>Im sorry we couldn't find this workshop</h1>
+      </div>
+    );
   }
 
   return (
@@ -125,13 +149,13 @@ function WorkshopDetails() {
                   <TimeIcon /> <span>{workshop?.time}</span>
                 </p>
               </div>
-              <h1 className="workshopTitle">{workshop.title}</h1>
+              <h1 className="workshopTitle">{workshop?.title}</h1>
               <p className="authorNameParagraph">
                 <strong>
                   WITH <span className="authorName">{author?.name}</span>
                 </strong>
               </p>
-              <p className="workshopDescription">{workshop.desc}</p>
+              <p className="workshopDescription">{workshop?.desc}</p>
             </div>
             <div className="buyTicketDiv">
               <p className="buyTicketParagraph">
@@ -139,7 +163,7 @@ function WorkshopDetails() {
               </p>
               <p className="ticketPrice">
                 <strong>
-                  {numberWithCommas(workshop.price)}{" "}
+                  {numberWithCommas(workshop?.price)}{" "}
                   <span className="currency">EUR</span>
                 </strong>
               </p>
@@ -159,7 +183,7 @@ function WorkshopDetails() {
                   </select>
                 </div>
                 <button
-                  onClick={() => dispatch(addItem(workshop, quantity))}
+                  onClick={() => onAddItemToCart(workshop)}
                   className="addToCartDetailsBtn"
                   type="button"
                 >
@@ -167,7 +191,8 @@ function WorkshopDetails() {
                 </button>
               </div>
               <p className="ticketSubtotal">
-                Subtotal: {numberWithCommas(workshop.price * quantity)}{" "}
+                Subtotal:{" "}
+                {numberWithCommas(workshop?.price && workshop.price * quantity)}{" "}
                 <span className="currency">EUR</span>
               </p>
             </div>

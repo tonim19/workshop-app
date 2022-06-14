@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { ReactComponent as CartIcon } from "../../assets/images/svg/cart-icon.svg";
 import { ReactComponent as CloseButton } from "../../assets/images/svg/close-button.svg";
 import { ReactComponent as TrashIcon } from "../../assets/images/svg/trash-icon.svg";
@@ -10,16 +10,63 @@ import {
 import CartContext from "../../context/cart/cartContext";
 import { numberWithCommas } from "../../helpers/util-functions";
 import { Item } from "../../interfaces";
+import Modal from "../Modal";
 import "./cart.css";
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  birthDate: string;
+  gender: string;
+  address: string;
+  zipCode: string;
+  agree: "false" | "true";
+}
 
 function Cart() {
   const { state, dispatch } = useContext(CartContext);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    birthDate: "",
+    gender: "",
+    address: "",
+    zipCode: "",
+    agree: "false",
+  });
+
+  const {
+    firstName,
+    lastName,
+    email,
+    birthDate,
+    gender,
+    address,
+    zipCode,
+    agree,
+  } = formData;
 
   if (!state.hidden) {
     document.body.setAttribute("class", "noScroll");
   } else {
     document.body.removeAttribute("class");
   }
+
+  const onChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onBoolChange = (e: any) => {
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value === "true" ? "false" : "true",
+      };
+    });
+  };
 
   const onChangeQuantity = (
     e: ChangeEvent<HTMLSelectElement>,
@@ -30,6 +77,11 @@ function Cart() {
     return state.cartItems.reduce((prev, curr) => {
       return prev + curr.price * curr.quantity;
     }, 0);
+  };
+
+  const onClick = () => {
+    dispatch(toggleCartHidden());
+    setShowModal(true);
   };
 
   if (!state.hidden) {
@@ -101,7 +153,7 @@ function Cart() {
               <span className="currency">EUR</span>
             </p>
           </div>
-          <button className="checkoutBtn" type="button">
+          <button onClick={onClick} className="checkoutBtn" type="button">
             Checkout
           </button>
         </div>
@@ -122,6 +174,122 @@ function Cart() {
           ? "1 Workshop in Cart"
           : `${state.cartItems.length} Workshops in Cart`}
       </span>
+      <Modal open={showModal}>
+        <div className="modalContentContainer">
+          <div className="modalTitleAndCloseBtn">
+            <h1>Checkout</h1>
+            <CloseButton
+              className="modalCloseBtn"
+              onClick={() => setShowModal(false)}
+            />
+          </div>
+          <p className="modalParagraph">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim ipsam
+            voluptatem tempore porro!
+          </p>
+          <form>
+            <div className="checkoutFormGroup">
+              <label htmlFor="firstName">First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={firstName}
+                onChange={onChange}
+                placeholder="Type your first name here"
+              />
+            </div>
+            <div className="checkoutFormGroup">
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={lastName}
+                onChange={onChange}
+                placeholder="Type your last name here"
+              />
+            </div>
+            <div className="checkoutFormGroup">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                onChange={onChange}
+                placeholder="Type your email address here"
+              />
+            </div>
+            <div className="flex">
+              <div className="checkoutFormGroup">
+                <label htmlFor="birthDate">Date of Birth</label>
+                <span className="datepicker-toggle">
+                  <span className="datepicker-toggle-button"></span>
+                  <input
+                    type="date"
+                    name="birthDate"
+                    id="birthDate"
+                    value={birthDate}
+                    onChange={onChange}
+                  />
+                </span>
+              </div>
+              <div className="checkoutFormGroup">
+                <label htmlFor="gender">Gender</label>
+                <select
+                  name="gender"
+                  id="gender"
+                  value={gender}
+                  onChange={onChange}
+                >
+                  <option value="" disabled>
+                    Choose your gender
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div className="checkoutFormGroup">
+              <label htmlFor="address">Address</label>
+              <input
+                type="text"
+                name="address"
+                id="address"
+                placeholder="Type your address here"
+                value={address}
+                onChange={onChange}
+              />
+            </div>
+            <div className="checkoutFormGroup">
+              <label htmlFor="zipCode">Zip Code</label>
+              <input
+                type="text"
+                name="zipCode"
+                id="zipCode"
+                placeholder="eg. 21310"
+                value={zipCode}
+                onChange={onChange}
+              />
+            </div>
+            <div className="checkoutFormGroup">
+              <input
+                type="checkbox"
+                name="agree"
+                id="agree"
+                value={agree}
+                onChange={onBoolChange}
+              />
+              <label htmlFor="agree">I agree</label>
+            </div>
+            <button className="checkoutFormBtn" type="submit">
+              Checkout
+            </button>
+          </form>
+        </div>
+      </Modal>
     </div>
   );
 }
