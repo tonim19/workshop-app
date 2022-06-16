@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CategoryContext from "../../context/category/categoryContext";
 import { formatDate } from "../../helpers/util-functions";
 import { Item } from "../../interfaces";
+import Spinner from "../Spinner";
 import WorkshopCard from "../WorkshopCard";
 import "./workshop-list.css";
 
@@ -12,6 +13,7 @@ function WorkshopsList({
 }) {
   const { category } = useContext(CategoryContext);
   const [workshops, setWorkshops] = useState<Item[] | null>(null);
+  const [loading, setLoading] = useState(true);
   const [filteredWorkshops, setFilteredWorkshops] = useState<Item[] | null>(
     null
   );
@@ -20,23 +22,28 @@ function WorkshopsList({
 
   useEffect(() => {
     const fetchWorkshops = async () => {
-      const response = await fetch(
-        "http://localhost:3000/workshops?_page=1&_limit=9"
-      );
-      const fetchedWorkshops: Item[] = await response.json();
-      fetchedWorkshops.sort((a, b) => {
-        const firstDate = new Date(a.date).getTime();
-        const secondDate = new Date(b.date).getTime();
-        return secondDate - firstDate;
-      });
+      try {
+        const response = await fetch(
+          "http://localhost:3000/workshops?_page=1&_limit=9"
+        );
+        const fetchedWorkshops: Item[] = await response.json();
+        fetchedWorkshops.sort((a, b) => {
+          const firstDate = new Date(a.date).getTime();
+          const secondDate = new Date(b.date).getTime();
+          return secondDate - firstDate;
+        });
 
-      fetchedWorkshops.forEach((workshop: Item) => {
-        const { date, time } = formatDate(workshop.date);
+        fetchedWorkshops.forEach((workshop: Item) => {
+          const { date, time } = formatDate(workshop.date);
 
-        workshop.formattedDate = date;
-        workshop.time = time;
-      });
-      setWorkshops(fetchedWorkshops);
+          workshop.formattedDate = date;
+          workshop.time = time;
+        });
+        setWorkshops(fetchedWorkshops);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
     };
 
     fetchWorkshops();
@@ -94,6 +101,18 @@ function WorkshopsList({
       setPage((prevState) => prevState + 1);
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (!workshops && !loading) {
+    return (
+      <div className="workshopNotFoundDiv">
+        <h1>Im sorry we couldn't find no workshops</h1>
+      </div>
+    );
+  }
 
   return (
     <>
