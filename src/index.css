@@ -95,62 +95,11 @@ html {
   font-size: 62.5%;
 }
 
-h1 {
-  font-size: 3.6rem;
-}
-
-h2 {
-  font-size: 3.2rem;
-}
-
-h3 {
-  font-size: 2.03rem;
-}
-
-h4 {
-  font-size: 1.89rem;
-}
-
-h5 {
-  font-size: 1.84rem;
-}
-
-h6 {
+.subtitle {
   font-size: 1.35rem;
-}
-
-p {
-  font-size: 1.44rem;
-}
-
-@media screen and (min-width: 800px) {
-  h1 {
-    font-size: 6rem;
-  }
-
-  h2 {
-    font-size: 4rem;
-  }
-
-  h3 {
-    font-size: 2.9rem;
-  }
-
-  h4 {
-    font-size: 2.7rem;
-  }
-
-  h5 {
-    font-size: 2.3rem;
-  }
-
-  h6 {
-    font-size: 1.5rem;
-  }
-
-  p {
-    font-size: 1.8rem;
-  }
+  font-weight: 700;
+  color: var(--color-light-grey);
+  margin: 1rem 0;
 }
 
 #root {
@@ -170,6 +119,10 @@ p {
     grid-template-columns: 1fr 3fr;
     gap: 2rem;
     margin: 5rem auto;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
   }
 }
 

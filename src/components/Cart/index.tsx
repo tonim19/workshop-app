@@ -56,11 +56,11 @@ function Cart() {
           <div className="cartHeader">
             <div>
               <CartIcon className="cartIcon" />
-              <h5>
+              <span className="cartTitle">
                 {state.cartItems.length === 1
                   ? "1 Workshop"
                   : `${state.cartItems.length} Workshops`}
-              </h5>
+              </span>
             </div>
             <CloseButton
               className="closeButton"

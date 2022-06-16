@@ -14,7 +14,8 @@
   margin: 3rem 0 1rem 0;
 }
 
-.categoryHeading h5 {
+.categoryHeading h2 {
+  font-size: 1.84rem;
   cursor: pointer;
   margin: 3rem 0 1rem 0;
 }
@@ -25,6 +26,11 @@
 
 .categorySelectionActive {
   display: block;
+  margin-top: 5rem;
+}
+
+aside .subtitle {
+  margin-left: 5rem;
 }
 
 .categorySelection h6,
@@ -35,42 +41,6 @@
 
 form {
   margin: 2rem 0;
-}
-
-.formGroup,
-.formGroupActive {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.formGroup input,
-.formGroupActive input {
-  appearance: none;
-}
-
-.formGroup label,
-.formGroupActive label {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  cursor: pointer;
-}
-
-.formGroup:first-child,
-.formGroupActive:first-child {
-  padding-left: 32px;
-}
-
-.formGroup h5,
-.formGroupActive h5 {
-  margin: 1rem;
-  border-bottom: 2px solid transparent;
-}
-
-.formGroupActive h5 {
-  color: var(--color-blue);
-  border-bottom: 2px solid var(--color-blue);
 }
 
 @media screen and (min-width: 800px) {

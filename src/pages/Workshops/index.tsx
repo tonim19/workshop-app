@@ -10,8 +10,8 @@ function Workshops() {
     <div className="container">
       <SelectCategory />
       <div className="mainContent">
-        <h2 className="workshopsTitle">Workshops</h2>
-        <p className="displayedWorkshops">
+        <h1 className="workshopsTitle">Workshops</h1>
+        <p className="subtitle">
           Displayed: <strong>{displayedWorshops}</strong>
         </p>
         <WorkshopsList setDisplayedWorkshops={setDisplayedWorkshops} />

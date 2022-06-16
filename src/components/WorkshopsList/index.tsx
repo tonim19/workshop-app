@@ -33,7 +33,7 @@ function WorkshopsList({
       fetchedWorkshops.forEach((workshop: Item) => {
         const { date, time } = formatDate(workshop.date);
 
-        workshop.date = date;
+        workshop.formattedDate = date;
         workshop.time = time;
       });
       setWorkshops(fetchedWorkshops);
@@ -74,21 +74,23 @@ function WorkshopsList({
       setMoreWorkshopsAvailable(false);
     }
 
-    fetchedWorkshops.sort((a, b) => {
-      const firstDate = new Date(a.date).getTime();
-      const secondDate = new Date(b.date).getTime();
-      return secondDate - firstDate;
-    });
-
-    fetchedWorkshops.forEach((workshop: Item) => {
-      const { date, time } = formatDate(workshop.date);
-
-      workshop.date = date;
-      workshop.time = time;
-    });
-
     if (workshops) {
-      setWorkshops([...workshops, ...fetchedWorkshops]);
+      const newArr = [...workshops, ...fetchedWorkshops];
+
+      newArr.sort((a, b) => {
+        const firstDate = new Date(a.date).getTime();
+        const secondDate = new Date(b.date).getTime();
+        return secondDate - firstDate;
+      });
+
+      newArr.forEach((workshop: Item) => {
+        const { date, time } = formatDate(workshop.date);
+
+        workshop.formattedDate = date;
+        workshop.time = time;
+      });
+
+      setWorkshops(newArr);
       setPage((prevState) => prevState + 1);
     }
   };

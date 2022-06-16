@@ -62,6 +62,12 @@
   align-items: center;
 }
 
+.workshopDetailsTitle {
+  color: var(--color-blue);
+  margin: 0;
+  font-size: 3.6rem;
+}
+
 .authorNameParagraph {
   font-size: 1.44rem;
   padding: 1rem 2rem;
@@ -144,6 +150,11 @@
   background-color: var(--color-lighter-grey);
 }
 
+.similarWorkshopsTitle {
+  font-size: 3.2rem;
+  text-align: center;
+}
+
 .similarWorkshopsContainer > h2 {
   text-align: center;
 }
@@ -177,6 +188,15 @@
 
   .workshopDetailsDateAndTime {
     margin-left: 3rem;
+  }
+
+  .workshopDetailsTitle {
+    font-size: 6rem;
+    margin: 2rem 0;
+  }
+
+  .authorNameParagraph {
+    padding: 2rem;
   }
 
   .buyTicketDiv {
@@ -249,5 +269,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+  }
+
+  .similarWorkshopsTitle {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-align: left;
   }
 }

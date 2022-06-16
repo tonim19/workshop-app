@@ -47,14 +47,14 @@ function SelectCategory() {
         }
       >
         <ArrowDown className="arrow" onClick={handleClick} />
-        <h5 onClick={handleClick}>{capitalizeFirstLetter(category)}</h5>
+        <h2 onClick={handleClick}>{capitalizeFirstLetter(category)}</h2>
       </div>
       <div
         className={
           selectionHidden ? "categorySelection" : "categorySelectionActive"
         }
       >
-        <h6>Filter by category:</h6>
+        <p className="subtitle">Filter by category:</p>
         <form ref={categoryForm}>
           <CategoryInput
             categoryName="all"

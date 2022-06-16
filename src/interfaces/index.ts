@@ -4,6 +4,7 @@ export interface Item {
   price: number;
   category: "marketing" | "backend" | "frontend" | "design";
   date: string;
+  formattedDate: string;
   time: string;
   imageUrl: string;
   userId: number;

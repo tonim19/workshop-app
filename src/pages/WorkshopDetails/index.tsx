@@ -41,7 +41,7 @@ function WorkshopDetails() {
 
         fetchedWorkshops.forEach((workshop: Item) => {
           const { date, time } = formatDate(workshop.date);
-          workshop.date = date;
+          workshop.formattedDate = date;
           workshop.time = time;
 
           if (workshop.id.toString() === params.workshopId) {
@@ -143,13 +143,13 @@ function WorkshopDetails() {
             <div className="aboutWorkshopDiv">
               <div className="workshopDetailsDateAndTime">
                 <p className="date">
-                  <DateIcon /> <span>{workshop?.date}</span>
+                  <DateIcon /> <span>{workshop?.formattedDate}</span>
                 </p>
                 <p className="time">
                   <TimeIcon /> <span>{workshop?.time}</span>
                 </p>
               </div>
-              <h1 className="workshopTitle">{workshop?.title}</h1>
+              <h1 className="workshopDetailsTitle">{workshop?.title}</h1>
               <p className="authorNameParagraph">
                 <strong>
                   WITH <span className="authorName">{author?.name}</span>
@@ -204,7 +204,7 @@ function WorkshopDetails() {
           <div className="detailsContainer">
             <div></div>
             <div>
-              <h2>Similar Workshops</h2>
+              <h2 className="similarWorkshopsTitle">Similar Workshops</h2>
               <div className="similarWorkshopsList">
                 {recommendWorkshops?.map((workshop) => (
                   <WorkshopCard key={workshop.id} workshop={workshop} />

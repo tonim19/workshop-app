@@ -42,24 +42,24 @@ function WorkshopCard({ workshop }: { workshop: Item }) {
         <div>
           <div className="dateAndTime">
             <p className="date">
-              <DateIcon /> <span>{workshop.date}</span>
+              <DateIcon /> <span>{workshop.formattedDate}</span>
             </p>
             <p className="time">
               <TimeIcon /> <span>{workshop.time}</span>
             </p>
           </div>
-          <h4
+          <h3
             className="workshopTitle"
             onClick={() => handleNavigate(workshop.id)}
           >
             {workshop.title}
-          </h4>
+          </h3>
         </div>
         <div className="workshopPriceAndBtn">
-          <h3 className="workshopPrice">
+          <h4 className="workshopPrice">
             {numberWithCommas(workshop.price)}{" "}
             <span className="currency">EUR</span>
-          </h3>
+          </h4>
           <div
             className="workshopCartIcon"
             onClick={() => addToCart(workshop, 1)}

@@ -9,6 +9,11 @@
   margin: 2rem;
 }
 
+.cartTitle {
+  font-size: 1.84rem;
+  font-weight: 700;
+}
+
 .cartText {
   font-size: 1.5rem;
   font-weight: 700;
@@ -35,7 +40,7 @@
 
 .cartActive .cartIcon {
   cursor: unset;
-  margin-left: 4rem;
+  margin-left: 2rem;
 }
 
 .cartHeader {
@@ -52,7 +57,7 @@
 
 .closeButton {
   cursor: pointer;
-  margin-right: 4rem;
+  margin-right: 2rem;
 }
 
 .cartItems {
@@ -348,7 +353,12 @@
   }
 
   .cartIcon {
-    margin: 1rem;
+    margin: 3rem 1rem;
+    margin-left: 1rem;
+  }
+
+  .cartTitle {
+    font-size: 2.3rem;
   }
 
   .cartText {
