@@ -47,7 +47,9 @@ function SelectCategory() {
         }
       >
         <ArrowDown className="arrow" onClick={handleClick} />
-        <h2 onClick={handleClick}>{capitalizeFirstLetter(category)}</h2>
+        <h2 data-testid="currentCategory" onClick={handleClick}>
+          {capitalizeFirstLetter(category)}
+        </h2>
       </div>
       <div
         className={

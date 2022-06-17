@@ -130,6 +130,7 @@ function Cart() {
     <div className="cart">
       <CartIcon
         className="cartIcon"
+        data-testid="cartOpenLink"
         onClick={() => dispatch(toggleCartHidden())}
       />
       <span className="cartText">

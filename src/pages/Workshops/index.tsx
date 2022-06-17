@@ -11,7 +11,7 @@ function Workshops() {
       <SelectCategory />
       <div className="mainContent">
         <h1 className="workshopsTitle">Workshops</h1>
-        <p className="subtitle">
+        <p className="subtitle" data-testid="displayedText">
           Displayed: <strong>{displayedWorshops}</strong>
         </p>
         <WorkshopsList setDisplayedWorkshops={setDisplayedWorkshops} />
