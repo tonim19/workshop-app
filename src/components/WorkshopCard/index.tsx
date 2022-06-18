@@ -19,7 +19,7 @@ function WorkshopCard({ workshop }: { workshop: Item }) {
 
   const addToCart = (workshop: Item, quantity: number) => {
     dispatch(addItem(workshop, quantity));
-    dispatch(toggleCartHidden());
+    dispatch(toggleCartHidden(false));
   };
 
   return (

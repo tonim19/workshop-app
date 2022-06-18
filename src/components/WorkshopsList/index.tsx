@@ -70,36 +70,38 @@ function WorkshopsList({
   }, [filteredWorkshops, setDisplayedWorkshops]);
 
   const fetchMoreWorkshops = async () => {
-    const response = await fetch(
-      `http://localhost:3000/workshops?_page=${page + 1}&_limit=9`
-    );
+    try {
+      const response = await fetch(
+        `http://localhost:3000/workshops?_page=${page + 1}&_limit=9`
+      );
 
-    const fetchedWorkshops: Item[] = await response.json();
+      const fetchedWorkshops: Item[] = await response.json();
 
-    if (fetchedWorkshops.length < 9) {
-      setPage(1);
-      setMoreWorkshopsAvailable(false);
-    }
+      if (fetchedWorkshops.length < 9) {
+        setPage(1);
+        setMoreWorkshopsAvailable(false);
+      }
 
-    if (workshops) {
-      const newArr = [...workshops, ...fetchedWorkshops];
+      if (workshops) {
+        const newArr = [...workshops, ...fetchedWorkshops];
 
-      newArr.sort((a, b) => {
-        const firstDate = new Date(a.date).getTime();
-        const secondDate = new Date(b.date).getTime();
-        return secondDate - firstDate;
-      });
+        newArr.sort((a, b) => {
+          const firstDate = new Date(a.date).getTime();
+          const secondDate = new Date(b.date).getTime();
+          return secondDate - firstDate;
+        });
 
-      newArr.forEach((workshop: Item) => {
-        const { date, time } = formatDate(workshop.date);
+        newArr.forEach((workshop: Item) => {
+          const { date, time } = formatDate(workshop.date);
 
-        workshop.formattedDate = date;
-        workshop.time = time;
-      });
+          workshop.formattedDate = date;
+          workshop.time = time;
+        });
 
-      setWorkshops(newArr);
-      setPage((prevState) => prevState + 1);
-    }
+        setWorkshops(newArr);
+        setPage((prevState) => prevState + 1);
+      }
+    } catch (error) {}
   };
 
   if (loading) {

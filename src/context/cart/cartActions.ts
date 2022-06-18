@@ -1,9 +1,10 @@
 import { Item } from "../../interfaces";
 import { CartActionTypes } from "./cartTypes";
 
-export const toggleCartHidden = () => {
+export const toggleCartHidden = (state: boolean) => {
   return {
     type: CartActionTypes.TOGGLE_CART_HIDDEN,
+    payload: state,
   };
 };
 

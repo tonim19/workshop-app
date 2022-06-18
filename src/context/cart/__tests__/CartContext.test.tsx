@@ -39,14 +39,14 @@ const workshop2: Item = {
 };
 
 describe("Cart Context Tests", () => {
-  it("dispatch toggleCartHidden toggles cart hidden", () => {
+  it("dispatch toggleCartHidden changes cart hidden", () => {
     render(
       <CartContextProvider>
         <CartContext.Consumer>
           {(value) => (
             <>
               <span>Current value: {JSON.stringify(value.state.hidden)}</span>
-              <button onClick={() => value.dispatch(toggleCartHidden())}>
+              <button onClick={() => value.dispatch(toggleCartHidden(false))}>
                 Toggle Cart Hidden
               </button>
             </>

@@ -99,7 +99,7 @@ function WorkshopDetails() {
   const onAddItemToCart = (workshop: Item | null) => {
     if (!workshop) return;
     dispatch(addItem(workshop, quantity));
-    dispatch(toggleCartHidden());
+    dispatch(toggleCartHidden(false));
   };
 
   if (loading) {
@@ -151,9 +151,13 @@ function WorkshopDetails() {
               </div>
               <h1 className="workshopDetailsTitle">{workshop?.title}</h1>
               <p className="authorNameParagraph">
-                <strong>
-                  WITH <span className="authorName">{author?.name}</span>
-                </strong>
+                {author?.name ? (
+                  <strong>
+                    WITH <span className="authorName">{author?.name}</span>
+                  </strong>
+                ) : (
+                  <strong>Couldn't find author</strong>
+                )}
               </p>
               <p className="workshopDescription">{workshop?.desc}</p>
             </div>

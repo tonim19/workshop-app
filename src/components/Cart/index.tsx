@@ -40,7 +40,7 @@ function Cart() {
   };
 
   const onClick = () => {
-    dispatch(toggleCartHidden());
+    dispatch(toggleCartHidden(true));
     setShowModal(true);
   };
 
@@ -55,7 +55,15 @@ function Cart() {
         <div className="cartContainer">
           <div className="cartHeader">
             <div>
-              <CartIcon className="cartIcon" />
+              <div
+                className="cartIconDiv"
+                data-cartitems={state.cartItems.length ? "" : null}
+              >
+                <CartIcon
+                  className="cartIcon"
+                  data-cartitems={state.cartItems.length}
+                />
+              </div>
               <span className="cartTitle">
                 {state.cartItems.length === 1
                   ? "1 Workshop"
@@ -64,7 +72,7 @@ function Cart() {
             </div>
             <CloseButton
               className="closeButton"
-              onClick={() => dispatch(toggleCartHidden())}
+              onClick={() => dispatch(toggleCartHidden(true))}
             />
           </div>
           <div className="cartItems">
@@ -128,11 +136,16 @@ function Cart() {
 
   return (
     <div className="cart">
-      <CartIcon
-        className="cartIcon"
-        data-testid="cartOpenLink"
-        onClick={() => dispatch(toggleCartHidden())}
-      />
+      <div
+        className="cartIconDiv"
+        data-cartitems={state.cartItems.length ? "" : null}
+      >
+        <CartIcon
+          className="cartIcon"
+          data-testid="cartOpenLink"
+          onClick={() => dispatch(toggleCartHidden(false))}
+        />
+      </div>
       <span className="cartText">
         {state.cartItems.length === 0
           ? "Cart is empty"
